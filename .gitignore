@@ -3,3 +3,4 @@ out/
 .idea/
 activate/
 *.iml
+*.MF
