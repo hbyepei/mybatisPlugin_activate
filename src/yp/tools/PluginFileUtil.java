@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class PluginFileUtil {
     private static final String pluginDirName = "mybatis_plus";
-    private static final String activateDir = "activate";
+    public static final String activateDir = "activate";
 
     /**
      * 生成破解之后的class文件目录
@@ -44,13 +44,10 @@ public class PluginFileUtil {
     }
 
     public static void replaceFile(File activateDir, File targetJar) throws IOException, InterruptedException {
-        String jarPath = targetJar.getAbsolutePath();
-        String activatePath = activateDir.getAbsolutePath();
-        String jreHome = System.getProperty("java.home");
-        String jarCmd = Paths.get(jreHome).getParent().resolve("bin/jar").toString();
-        String comPath = "'" + activatePath + "'";
-        String cmd = "cd '" + activatePath + "' & " + jarCmd + " uvf '" + jarPath + "' -C " + comPath + " com";
-        callShell(cmd);
+        String jarCmd = Paths.get(System.getProperty("java.home")).getParent().resolve("bin/jar").toString();
+        String cmd = jarCmd + " uvf '" + targetJar.getAbsolutePath() + "' -C '" + activateDir.getAbsolutePath() + "' com";
+        String[] cmds = getSystem() == OS.windows ? new String[]{"cmd", "/k", cmd} : new String[]{"/bin/sh", "-c", cmd};
+        callShell(cmds);
     }
 
     public static File getPluginJar() throws FileNotFoundException, AccessDeniedException {
@@ -116,28 +113,36 @@ public class PluginFileUtil {
         return f;
     }
 
-    private static void callShell(String cmd) throws IOException, InterruptedException {
-        String[] command = new String[]{"/bin/sh", "-c", cmd};
-        Process process = Runtime.getRuntime().exec(command);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        StringBuilder line = new StringBuilder();
-        String temp = "";
+    private static void callShell(String[] cmd) throws IOException, InterruptedException {
         System.out.println("激活前请关闭正在使用的IDE!!!");
         System.out.println("正在激活中，请稍后...");
-        while (temp != null) {
-            temp = reader.readLine();
-            if (temp != null) line.append(temp);
-        }
-        reader.close();
+        Process process = Runtime.getRuntime().exec(cmd);
+        String info = readString(process.getInputStream());
+        String error = readString(process.getErrorStream());
+
         int exitCode = process.waitFor();
+        //        process.destroy();
         if (0 != exitCode) {
-            throw new RuntimeException("调用shell失败. 错误码 :" + exitCode + ", 原因:" + line);
+            throw new RuntimeException("调用shell失败. 错误码 :" + exitCode + ", 原因:" + System.lineSeparator() + cmd + System.lineSeparator() + error);
         } else {
+            System.out.println(info);
             System.out.println("激活成功!");
         }
     }
 
-    public static String getWorkDir(){
+    private static String readString(InputStream in) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        StringBuilder line = new StringBuilder();
+        String temp = "";
+        while (temp != null) {
+            temp = reader.readLine();
+            if (temp != null) line.append(temp).append(System.lineSeparator());
+        }
+        reader.close();
+        return line.toString();
+    }
+
+    public static String getWorkDir() {
         return System.getProperty("user.dir");
     }
 

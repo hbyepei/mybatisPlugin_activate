@@ -24,5 +24,6 @@ public class Main {
         PluginFileUtil.replaceFile(activateFile, targetJar);
         System.out.println("结束");
         PluginFileUtil.clean(new File(PluginFileUtil.getWorkDir() + "/out"));
+        PluginFileUtil.clean(new File(PluginFileUtil.getWorkDir() + "/" + PluginFileUtil.activateDir));
     }
 }
