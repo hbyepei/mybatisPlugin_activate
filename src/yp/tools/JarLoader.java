@@ -10,7 +10,7 @@ import java.net.URLClassLoader;
  *
  * @author yepei
  */
-public final class ExtClasspathLoader {
+public final class JarLoader {
     private static URLClassLoader classloader;
 
     /**
