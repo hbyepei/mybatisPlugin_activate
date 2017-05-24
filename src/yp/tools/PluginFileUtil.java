@@ -123,9 +123,9 @@ public class PluginFileUtil {
         StringBuilder line = new StringBuilder();
         String temp = "";
         System.out.println("激活前请关闭正在使用的IDE!!!");
+        System.out.println("正在激活中，请稍后...");
         while (temp != null) {
             temp = reader.readLine();
-            System.out.println("正在激活中，请稍后...");
             if (temp != null) line.append(temp);
         }
         reader.close();
