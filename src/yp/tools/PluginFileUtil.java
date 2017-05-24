@@ -122,15 +122,18 @@ public class PluginFileUtil {
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         StringBuilder line = new StringBuilder();
         String temp = "";
+        System.out.println("激活前请关闭正在使用的IDE!!!");
         while (temp != null) {
             temp = reader.readLine();
-            System.out.println(temp);
+            System.out.println("正在激活中，请稍后...");
             if (temp != null) line.append(temp);
         }
         reader.close();
         int exitCode = process.waitFor();
         if (0 != exitCode) {
             throw new RuntimeException("调用shell失败. 错误码 :" + exitCode + ", 原因:" + line);
+        } else {
+            System.out.println("激活成功!");
         }
     }
 
