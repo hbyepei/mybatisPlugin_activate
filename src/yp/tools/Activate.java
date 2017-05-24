@@ -22,6 +22,7 @@ public class Activate {
         File activateFile = PluginFileUtil.genActiveFile();
         File targetJar = PluginFileUtil.getPluginJar();
         PluginFileUtil.replaceFile(activateFile, targetJar);
-        System.out.println("激活完成");
+        System.out.println("结束");
+        PluginFileUtil.clean(new File(PluginFileUtil.getWorkDir() + "/out"));
     }
 }

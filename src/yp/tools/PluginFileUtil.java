@@ -62,7 +62,7 @@ public class PluginFileUtil {
         clean(new File(getActivateOut()));
     }
 
-    private static void clean(File f) {
+    public static void clean(File f) {
         if (f == null || !f.exists()) return;
         if (f.isDirectory()) {
             for (File file : f.listFiles()) {
@@ -137,7 +137,11 @@ public class PluginFileUtil {
         }
     }
 
+    public static String getWorkDir(){
+        return System.getProperty("user.dir");
+    }
+
     private static String getActivateOut() {
-        return System.getProperty("user.dir") + "/" + activateDir;
+        return getWorkDir() + "/" + activateDir;
     }
 }
