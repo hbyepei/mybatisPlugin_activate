@@ -5,7 +5,7 @@ import java.io.File;
  * Created by yepei.ye on 2017/5/17.
  * Description:
  */
-public class Activate {
+public class Main {
     /**
      * 此方法修改了用于激活的字字节码文件，替换了原有激活逻辑，并生成了新的javaUtils及ActivationDriver字节码文件
      *
