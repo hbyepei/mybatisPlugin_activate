@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>yp.tools.plugin.my_activator</id>
     <name>My_Activator</name>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <vendor email="hbyepei@qq.com" url="http://www.cnblogs.com/yepei">一人浅醉-</vendor>
 
     <description><![CDATA[
@@ -11,6 +11,9 @@
         <ol>注意，mybatis_plugin插件经常更新，如果更新了，需要重新执行一次本插件即可激活。</ol>
         <ol>作者：叶佩，如有问题，请联系QQ:519549317@qq.com</ol>
       </em>
+      <br>
+      <b>使用方法:</b>
+      <p>安装好本插件后，重启IDE然后，在菜单栏中的Tools选项中，选择“MyActivator”，单击即可激活！</p>
     ]]></description>
 
     <change-notes><![CDATA[
