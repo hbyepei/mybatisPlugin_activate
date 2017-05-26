@@ -16,14 +16,14 @@ public class Main extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent event) {
         Project project = event.getData(PlatformDataKeys.PROJECT);
-        int activation = Messages.showYesNoDialog(project, "If you have installed mybatis_plugin, please presson 'Activate' button to Activate it!", "Activation", "Activate", "Cancel", Messages.getQuestionIcon());
+        int activation = Messages.showYesNoDialog(project, "如果你已经安装了mybatis_plugin插件, 请点击'激 活' 按钮 来激活mybatis_plugin插件!", "激活", "激 活", "取 消", Messages.getQuestionIcon());
         if (activation == Messages.YES) {
             ShellUtil.ShellInfo shellInfo = Activator.doActivate();
             int code = shellInfo.code;
             if (code == 0) {
-                Messages.showInfoMessage(shellInfo.message, "Success");
+                Messages.showInfoMessage(shellInfo.message, "激活成功");
             } else {
-                Messages.showErrorDialog(shellInfo.message, "Failed");
+                Messages.showErrorDialog(shellInfo.message, "激活失败");
             }
         }
     }

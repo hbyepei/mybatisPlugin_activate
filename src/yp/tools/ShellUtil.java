@@ -3,6 +3,8 @@ import yp.tools.enums.OS;
 
 import java.io.*;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Author:yepei@meituan.com
@@ -46,9 +48,17 @@ public class ShellUtil {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         StringBuilder line = new StringBuilder();
         String temp = "";
+        List<String> infos = new ArrayList<>();
         while (temp != null) {
+            int last = infos.size() - 1;
+            String lastInfo = last > -1 ? infos.get(last) : "";
             temp = reader.readLine();
-            if (temp != null) line.append(temp).append(System.lineSeparator());
+            if (temp != null && !temp.equalsIgnoreCase(lastInfo)) {
+                infos.add(temp);
+            }
+        }
+        for (String s : infos) {
+            line.append(s).append(System.lineSeparator());
         }
         reader.close();
         return line.toString();

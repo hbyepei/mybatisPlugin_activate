@@ -27,7 +27,6 @@ public class FileUtil {
      */
     public static File genActiveFile() throws Exception {
         ClassPool pool = ClassPool.getDefault();
-        //更好的方法是，判断操作系统，然后获取插件目录，加载相应的jar文件
         JarLoader.loadClasspath(getPluginJar());
 
         CtClass driverClass = pool.get("com.seventh7.mybatis.ref.license.ActivationDriver");
@@ -36,7 +35,7 @@ public class FileUtil {
         CtMethod refValid = javaUtil.getDeclaredMethod("refValid");
         refValid.setBody("{return true;}");
         activateMethod.setBody("{com.seventh7.mybatis.ref.license.LicenseData licenseData = new com.seventh7.mybatis.ref.license.LicenseData(\"1\", \"2\");com.seventh7.mybatis.ref.license.ActivationResult res =com.seventh7.mybatis.ref.license.ActivationResult.success(licenseData); return res;}");
-        //生成破解之后的class文件
+
         driverClass.writeFile(activateDir);
         javaUtil.writeFile(activateDir);
         JarLoader.close();
@@ -56,8 +55,11 @@ public class FileUtil {
     private static void clean(File f) {
         if (f == null || !f.exists()) return;
         if (f.isDirectory()) {
-            for (File file : f.listFiles()) {
-                clean(file);
+            File[] files = f.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    clean(file);
+                }
             }
         }
         f.delete();
