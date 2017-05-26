@@ -1,8 +1,8 @@
 <idea-plugin>
     <id>yp.tools.plugin.my_activator</id>
     <name>My_Activator</name>
-    <version>1.0.2</version>
-    <!--<vendor email="hbyepei@qq.com" url="http://www.meituan.com">美团网</vendor>-->
+    <version>1.0.3</version>
+    <vendor email="hbyepei@qq.com" url="http://www.cnblogs.com/yepei">一人浅醉-</vendor>
 
     <description><![CDATA[
       自动破解mybatis_plugin插件<br>
