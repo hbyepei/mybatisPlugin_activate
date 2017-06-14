@@ -2,7 +2,7 @@
     <id>yp.tools.plugin.my_activator</id>
     <name>My_Activator</name>
     <version>1.0.5</version>
-    <vendor email="hbyepei@qq.com" url="http://www.cnblogs.com/yepei">一人浅醉-</vendor>
+    <vendor email="hbyepei@qq.com" url="">一人浅醉-</vendor>
 
     <description><![CDATA[
       <b>Helper for mybatis_plugin</b><br>
