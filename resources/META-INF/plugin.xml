@@ -1,11 +1,19 @@
 <idea-plugin>
     <id>yp.tools.plugin.my_activator</id>
     <name>My_Activator</name>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <vendor email="hbyepei@qq.com" url="http://www.cnblogs.com/yepei">一人浅醉-</vendor>
 
     <description><![CDATA[
-      自动破解mybatis_plugin插件<br>
+      <b>Helper for mybatis_plugin</b><br>
+      <em>
+        This is a useful tool for users of mybatis_plugin in Intellij Idea, which makes a convenience and
+        enhancement to access the mybatis_plugin.
+        This plugin is free, and easily to use. Just click the 'MybatisPluginActivator' menu in tools menu!
+        It may be update sometimes, any problem please contact the author by QQ: 519549317
+      </em>
+      <br>
+      <b>自动破解mybatis_plugin插件</b><br>
       <em>
         <ol>mybatis_plugin插件是一个很好用的插件，具体作用就不多说了，不过可惜的是，它是收费的，此工具提供了激活此插件的功能。</ol>
         <ol>注意，mybatis_plugin插件经常更新，如果更新了，需要重新执行一次本插件即可激活。</ol>
