@@ -11,11 +11,11 @@ import java.io.File;
 public class Activator {
     public static ShellUtil.ShellInfo doActivate() {
         try {
-            FileUtil.clean();
+            FileUtil.clean(false);
             File activateFile = FileUtil.genActiveFile();
             File targetJar = FileUtil.getPluginJar();
             ShellUtil.ShellInfo shellInfo = ShellUtil.updateJar(activateFile, targetJar);
-            FileUtil.clean();
+            FileUtil.clean(true);
             return shellInfo;
         } catch (Exception e) {
             return new ShellUtil.ShellInfo(-1, e.getMessage());

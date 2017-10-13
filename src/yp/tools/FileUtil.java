@@ -34,11 +34,12 @@ public class FileUtil {
         CtMethod activateMethod = driverClass.getMethod("activate", "(Ljava/lang/String;)Lcom/seventh7/mybatis/ref/license/ActivationResult;");
         CtMethod refValid = javaUtil.getDeclaredMethod("refValid");
         refValid.setBody("{return true;}");
-        activateMethod.setBody("{com.seventh7.mybatis.ref.license.LicenseData licenseData = new com.seventh7.mybatis.ref.license.LicenseData(\"1\", \"2\");com.seventh7.mybatis.ref.license.ActivationResult res =com.seventh7.mybatis.ref.license.ActivationResult.success(licenseData); return res;}");
+        activateMethod.setBody(
+                "{com.seventh7.mybatis.ref.license.LicenseData licenseData = new com.seventh7.mybatis.ref.license.LicenseData(\"1\", \"2\");com.seventh7.mybatis.ref.license.ActivationResult res =com.seventh7.mybatis.ref.license.ActivationResult.success(licenseData); return res;}");
 
         driverClass.writeFile(activateDir);
         javaUtil.writeFile(activateDir);
-        JarLoader.close();
+        //        JarLoader.close();
         return new File(getActivateOut());
     }
 
@@ -47,9 +48,11 @@ public class FileUtil {
         return checkAccess(f);
     }
 
-    public static void clean() {
+    public static void clean(boolean cleanClassDir) {
         clean(new File(getActivateOut()));
-        clean(new File(SystemUtil.getWorkDir() + "/out"));
+        if (cleanClassDir) {
+            clean(new File(SystemUtil.getWorkDir() + "/out"));
+        }
     }
 
     private static void clean(File f) {
@@ -73,7 +76,8 @@ public class FileUtil {
 
         File[] subFiles = f.listFiles((dir, name) -> {
             String lowerName = name.toLowerCase();
-            boolean nameOk = lowerName.startsWith("intellijidea") || lowerName.startsWith("intellij idea") || lowerName.startsWith(".intellijidea") || lowerName.startsWith(".intellij idea");
+            boolean nameOk = lowerName.startsWith("intellijidea") || lowerName.startsWith("intellij idea") || lowerName.startsWith(".intellijidea") || lowerName.startsWith(
+                    ".intellij idea");
             return nameOk && dir.isDirectory();
         });
         if (subFiles == null || subFiles.length == 0) throw new FileNotFoundException("没找到idea配置目录");

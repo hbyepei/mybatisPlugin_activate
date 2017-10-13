@@ -14,6 +14,7 @@ import java.util.List;
  * Desc:
  */
 public class ShellUtil {
+    public static void init(){}
     public static class ShellInfo {
         int code;
         String message;
@@ -33,7 +34,10 @@ public class ShellUtil {
 
     public static ShellInfo callShell(String[] cmd) throws IOException, InterruptedException {
         String sep = System.lineSeparator();
-        StringBuilder sb = new StringBuilder("激活前请关闭正在使用的IDE!!!").append(sep).append("正在激活中，请稍后...").append(sep);
+        StringBuilder sb =
+                new StringBuilder("准备激活...")
+//                new StringBuilder("激活前请关闭正在使用的IDE!!!")
+                .append(sep).append("正在激活中，请稍后...").append(sep);
 
         Process process = Runtime.getRuntime().exec(cmd);
         String info = readString(process.getInputStream());
